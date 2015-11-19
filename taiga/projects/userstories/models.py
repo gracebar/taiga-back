@@ -21,6 +21,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
 from djorm_pgarray.fields import TextArrayField
+from django_pgjson.fields import JsonField
 
 from taiga.base.tags import TaggedMixin
 from taiga.projects.occ import OCCModelMixin
@@ -101,6 +102,7 @@ class UserStory(OCCModelMixin, WatchedModelMixin, BlockedMixin, TaggedMixin, mod
                                              related_name="generated_user_stories",
                                              verbose_name=_("generated from issue"))
     external_reference = TextArrayField(default=None, verbose_name=_("external reference"))
+    tribe_gig = JsonField(null=True, blank=True, default=None)
     _importing = None
 
     class Meta:
