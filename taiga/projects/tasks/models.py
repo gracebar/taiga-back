@@ -58,7 +58,10 @@ class Task(OCCModelMixin, WatchedModelMixin, BlockedMixin, TaggedMixin, models.M
                                           verbose_name=_("taskboard order"))
 
     description = models.TextField(null=False, blank=True, verbose_name=_("description"))
-    assigned_to = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True,
+    #assigned_to = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True,
+                                    #default=None, related_name="tasks_assigned_to_me",
+                                    #verbose_name=_("assigned to"))
+    assigned_to = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, null=True,
                                     default=None, related_name="tasks_assigned_to_me",
                                     verbose_name=_("assigned to"))
     attachments = generic.GenericRelation("attachments.Attachment")
